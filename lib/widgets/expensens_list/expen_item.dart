@@ -8,28 +8,28 @@ class ExpenItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+      child: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(expensens.title),
+            Row(
               children: [
-                Column(
-                  children: [
-                    Text(expensens.title),
-                    Text("\$ ${expensens.amount.toStringAsFixed(2)}"),
-                  ],
+                Text(
+                  "\$ ${expensens.amount.toStringAsFixed(2)}",
                 ),
                 const Spacer(),
-                Icon(Icons.wallet),
-                Text(
-                  expensens.date.toString(),
-                )
+                Icon(categoryIcon[expensens.category]),//?
+                const SizedBox(
+                  width: 5
+                  ,
+                ),
+                Text(expensens.formatate)
               ],
-            ),
-          ),
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

@@ -27,7 +27,7 @@ class ExpensesList extends StatelessWidget {
       itemBuilder: (context, index) {
         return ExpenItem(expensesList[index]);
       },
-    ); //?
+    ); 
   }
 }
 
