@@ -23,7 +23,7 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
                 hintText: "input expense title"),
             maxLength: 50,
           ),
-          TextField(
+          TextField(keyboardType: TextInputType.numberWithOptions(),
             decoration: InputDecoration(
                 label: Text("Amount"),
                 hintText: "plz enter the price",
