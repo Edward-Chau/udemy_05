@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy05_expense_tracke_app/widgets/expen_overlay.dart';
 import 'package:udemy05_expense_tracke_app/widgets/expensens_list/Expenses_list.dart';
 import 'package:udemy05_expense_tracke_app/model/expenses.dart';
 import 'package:udemy05_expense_tracke_app/widgets/expensens.dart';
@@ -30,7 +31,7 @@ class _ExpensensState extends State<Expensens> {
     showModalBottomSheet(
         context: context,
         builder: (ctx) {
-          return Text("sadasdaslknasdnljasdlknsadklnasd");
+          return const ExpenOverlay();
         });
   }
 

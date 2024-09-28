@@ -12,7 +12,7 @@ const categoryIcon = {
   Category.travel: Icons.flight_takeoff,
   Category.leisure: Icons.movie,
   Category.work: Icons.work
-};
+}; //food:icon //?image
 
 class Expenses {
   Expenses(
