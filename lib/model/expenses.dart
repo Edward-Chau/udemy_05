@@ -30,5 +30,5 @@ class Expenses {
 
   String get formatate {
     return format.format(date);
-  } 
+  }
 }
