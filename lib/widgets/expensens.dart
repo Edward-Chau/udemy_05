@@ -29,6 +29,13 @@ class _ExpensensState extends State<Expensens> {
 
   void openAddExpensenOverlay() {
     showModalBottomSheet(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(10),
+            topRight: Radius.circular(10),
+          ),
+        ),
+        isScrollControlled: true,
         context: context,
         builder: (ctx) {
           return const ExpenOverlay();
