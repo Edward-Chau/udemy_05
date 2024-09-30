@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy05_expense_tracke_app/model/expenses.dart';
 
 class ExpenOverlay extends StatefulWidget {
   const ExpenOverlay({super.key});
@@ -7,6 +8,7 @@ class ExpenOverlay extends StatefulWidget {
   State<ExpenOverlay> createState() => _ExpenOverlayState();
 }
 
+
 class _ExpenOverlayState extends State<ExpenOverlay> {
   // String? enteredTitle;
 
@@ -14,9 +16,11 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
   //   enteredTitle = inputvalue;
   // }
 
+
   final titleController = TextEditingController();
   final amountController = TextEditingController();
-
+  DateTime? selectedDate;
+  String? formatTime;
   @override
   void dispose() {
     titleController.dispose();
@@ -24,14 +28,18 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
     super.dispose();
   }
 
-  void datePacker() {
+  void datePacker() async {
     final nowDate = DateTime.now();
-    showDatePicker(
+    final pickDate=await showDatePicker(
       context: context,
       initialDate: nowDate,
       firstDate: DateTime(nowDate.year - 100),
       lastDate: DateTime(nowDate.year + 1),
     );
+    setState(() {
+      selectedDate=pickDate;
+
+    });
   }
 
   @override
@@ -88,7 +96,7 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const Text("Seleced Date"),
+                     Text(selectedDate==null?'No seleced Date':format.format(selectedDate!),),
                     const SizedBox(
                       width: 5,
                     ),
@@ -102,7 +110,8 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
             ],
           ),
           Row(
-            children: [
+            children: [DropdownButton(items: Category.values.map(toElement){return DropdownMenuItem(child: tex);} , onChanged: (value){}),//enum?
+              const Spacer(),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -113,6 +122,7 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
                 onPressed: () {
                   print(titleController.text);
                   print(amountController.text);
+                  // print(pickDate);
                 },
                 child: const Text("Save Expense"),
               )
