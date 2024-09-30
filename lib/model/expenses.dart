@@ -6,7 +6,7 @@ const uuid = Uuid();
 var format = DateFormat.yMd();
 
 enum Category { food, work, travel, leisure }
-enum test{sss,dddd,ffff}
+
 
 const categoryIcon = {
   Category.food: Icons.lunch_dining,

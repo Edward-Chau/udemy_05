@@ -39,6 +39,8 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
     });
   }
 
+  final List<String> test01 = ['ss', 'd', 'f'];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -93,15 +95,10 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      selectedDate == null
-                          ? 'No seleced Date'
-                          : format.format(selectedDate!),
-                    ),
-                    //  Text(showDate()),
-                    const SizedBox(
-                      width: 5,
-                    ),
+                    if (selectedDate == null)
+                      const Text('No seleced Date')
+                    else
+                      Text(format.format(selectedDate!)),
                     IconButton(
                       onPressed: datePacker,
                       icon: const Icon(Icons.calendar_month),
@@ -111,15 +108,19 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
               ),
             ],
           ),
-          const SizedBox(height: 30),
+          const SizedBox(height: 50),
           Row(
             children: [
               DropdownButton(
-                  value: Category.food,
-                  items: items,
-                  onChanged: (value) {}) //enum?
-
-              ,
+                items: Category.values.map((item) {
+                  return DropdownMenuItem(
+                    value: item,
+                    child: Text(item.name),
+                  );
+                }).toList(),
+                value: Category.food,
+                onChanged: (value) {},
+              ),
               const Spacer(),
               ElevatedButton(
                 onPressed: () {
@@ -141,11 +142,4 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
       ),
     );
   }
-
-  // String showDate(){
-  //   final String showaDate;
-  //   if(selectedDate==null){showDate='No seleced Date';}
-  //   if(selectedDate!=null){}
-  //   return showaDate;
-  //   }
 }
