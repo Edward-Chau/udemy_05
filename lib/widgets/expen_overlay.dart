@@ -8,7 +8,6 @@ class ExpenOverlay extends StatefulWidget {
   State<ExpenOverlay> createState() => _ExpenOverlayState();
 }
 
-
 class _ExpenOverlayState extends State<ExpenOverlay> {
   // String? enteredTitle;
 
@@ -16,11 +15,10 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
   //   enteredTitle = inputvalue;
   // }
 
-
   final titleController = TextEditingController();
   final amountController = TextEditingController();
   DateTime? selectedDate;
-  String? formatTime;
+
   @override
   void dispose() {
     titleController.dispose();
@@ -30,15 +28,14 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
 
   void datePacker() async {
     final nowDate = DateTime.now();
-    final pickDate=await showDatePicker(
+    final pickDate = await showDatePicker(
       context: context,
       initialDate: nowDate,
       firstDate: DateTime(nowDate.year - 100),
       lastDate: DateTime(nowDate.year + 1),
     );
     setState(() {
-      selectedDate=pickDate;
-
+      selectedDate = pickDate;
     });
   }
 
@@ -96,7 +93,12 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                     Text(selectedDate==null?'No seleced Date':format.format(selectedDate!),),
+                    Text(
+                      selectedDate == null
+                          ? 'No seleced Date'
+                          : format.format(selectedDate!),
+                    ),
+                    //  Text(showDate()),
                     const SizedBox(
                       width: 5,
                     ),
@@ -109,8 +111,15 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
               ),
             ],
           ),
+          const SizedBox(height: 30),
           Row(
-            children: [DropdownButton(items: Category.values.map(toElement){return DropdownMenuItem(child: tex);} , onChanged: (value){}),//enum?
+            children: [
+              DropdownButton(
+                  value: Category.food,
+                  items: items,
+                  onChanged: (value) {}) //enum?
+
+              ,
               const Spacer(),
               ElevatedButton(
                 onPressed: () {
@@ -132,4 +141,11 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
       ),
     );
   }
+
+  // String showDate(){
+  //   final String showaDate;
+  //   if(selectedDate==null){showDate='No seleced Date';}
+  //   if(selectedDate!=null){}
+  //   return showaDate;
+  //   }
 }
