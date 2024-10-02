@@ -80,119 +80,129 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        children: [
-          Container(
-            height: 6,
-            width: 120,
-            decoration: BoxDecoration(
-              color: Colors.grey[500],
-              borderRadius: BorderRadius.circular(10),
-            ),
+    return Column(
+      children: [
+        const SizedBox(
+          height: 16,
+        ),
+        Container(
+          height: 6,
+          width: 120,
+          decoration: BoxDecoration(
+            color: Colors.grey[500],
+            borderRadius: BorderRadius.circular(10),
           ),
-          const SizedBox(
-            height: 10,
-          ),
-          TextField(
-            controller: titleController,
-            decoration: const InputDecoration(
-                icon: Icon(
-                  Icons.send,
-                  size: 20,
-                ),
-                labelText: "Tltle",
-                hintText: "input expense title"),
-            maxLength: 50,
-          ),
-          Row(
+        ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 40, 16, 16),
+          child: Column(
             children: [
-              Expanded(
-                flex: 4,
-                child: TextField(
-                  keyboardType: const TextInputType.numberWithOptions(),
-                  controller: amountController,
-                  decoration: const InputDecoration(
-                    label: Text("Amount"),
-                    // hintText: "plz enter the price",
-                    prefixIcon: Icon(
-                      Icons.send,
-                      size: 15,
-                    ),
-                    prefixText: '\$ ',
-                  ),
-                ),
-              ),
               const SizedBox(
-                width: 16,
+                height: 10,
               ),
-              Expanded(
-                flex: 3,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    if (selectedDate == null)
-                      const Text('No seleced Date')
-                    else
-                      Text(
-                        format.format(selectedDate!),
-                      ),
-                    IconButton(
-                      onPressed: datePacker,
-                      icon: const Icon(Icons.calendar_month),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 50),
-          Row(
-            children: [
-              DropdownButton(
-                items: Category.values.map((item) {
-                  return DropdownMenuItem(
-                    value: item,
-                    child: Text(
-                      item.name.toUpperCase(),
+              TextField(
+                controller: titleController,
+                decoration: const InputDecoration(
+                    icon: Icon(
+                      Icons.send,
+                      size: 20,
                     ),
-                  );
-                }).toList(),
-                value: selectedCategory,
-                onChanged: (value) {
-                  setState(
-                    () {
-                      if (value == null) {
-                        return;
-                      }
-                      selectedCategory = value;
+                    labelText: "Tltle",
+                    hintText: "input expense title"),
+                maxLength: 50,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: TextField(
+                      keyboardType: const TextInputType.numberWithOptions(),
+                      controller: amountController,
+                      decoration: const InputDecoration(
+                        label: Text("Amount"),
+                        // hintText: "plz enter the price",
+                        prefixIcon: Icon(
+                          Icons.send,
+                          size: 15,
+                        ),
+                        prefixText: '\$ ',
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        if (selectedDate == null)
+                          const Text('No seleced Date')
+                        else
+                          Text(
+                            format.format(selectedDate!),
+                          ),
+                        IconButton(
+                          onPressed: datePacker,
+                          icon: const Icon(Icons.calendar_month),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 50),
+              Row(
+                children: [
+                  DropdownButton(
+                    items: Category.values.map((item) {
+                      return DropdownMenuItem(
+                        value: item,
+                        child: Text(
+                          item.name.toUpperCase(),
+                        ),
+                      );
+                    }).toList(),
+                    value: selectedCategory,
+                    onChanged: (value) {
+                      setState(
+                        () {
+                          if (value == null) {
+                            return;
+                          }
+                          selectedCategory = value;
+                        },
+                      );
                     },
-                  );
-                },
-              ),
-              const Spacer(),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text("Cancel"),
-              ),
-              ElevatedButton(
-                onPressed: saveExpense
-                // onPressed: () {
-                //   print(titleController.text);
-                //   print(amountController.text);
-                //   print(selectedDate);
-                //   print(selectedCategory);
-                // },
-                ,
-                child: const Text("Save Expense"),
+                  ),
+                  const Spacer(),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Cancel"),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: saveExpense
+                    // onPressed: () {
+                    //   print(titleController.text);
+                    //   print(amountController.text);
+                    //   print(selectedDate);
+                    //   print(selectedCategory);
+                    // },
+                    ,
+                    child: const Text("Save Expense"),
+                  )
+                ],
               )
             ],
-          )
-        ],
-      ),
+          ),
+        ),
+      ],
     );
   }
 }

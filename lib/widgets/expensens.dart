@@ -79,15 +79,17 @@ class _ExpensensState extends State<Expensens> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          const Text("The Chart"),
-          Expanded(
-            //?
-            child: ExpensesList(expensesList: registeredExpenses),
-          ),
-          // ...registeredExpenses.map((item){return Text(((item.id)));})
-        ],
+      body: Container(margin: EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            const Text("The Chart"),
+            Expanded(
+              //?
+              child: ExpensesList(expensesList: registeredExpenses),
+            ),
+            // ...registeredExpenses.map((item){return Text(((item.id)));})
+          ],
+        ),
       ),
     );
   }

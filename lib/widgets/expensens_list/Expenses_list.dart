@@ -24,8 +24,21 @@ class ExpensesList extends StatelessWidget {
     return ListView.builder(
       itemCount: expensesList.length,
       itemBuilder: (context, index) {
-        return ExpenItem(
-          expensesList[index],
+        return Dismissible(
+          background: Container(
+            color: Colors.red,
+            child: const Row(
+              children: [Spacer(),
+                 Icon(Icons.cancel),SizedBox(width: 30,)
+              ],
+            ),
+          ),
+          key: ValueKey(
+            expensesList[index],
+          ),
+          child: ExpenItem(
+            expensesList[index],
+          ),
         );
       },
     );
