@@ -27,19 +27,44 @@ class _ExpensensState extends State<Expensens> {
         category: Category.food),
   ];
 
+  // addToList(String titleController, String amountController,
+  //     DateTime selectedDate, Category selectedCategory) {
+  //   setState(
+  //     () {
+  //       registeredExpenses.add(
+  //         Expenses(
+  //             title: titleController,
+  //             amount: double.tryParse(amountController)!,
+  //             date: selectedDate,
+  //             category: selectedCategory),
+  //       );
+  //     },
+  //   );
+  // }
+
+  onAddExpense(Expenses item) {
+    setState(
+      () {
+        registeredExpenses.add(item);
+      },
+    );
+    Navigator.pop(context);
+  } //?
+
   void openAddExpensenOverlay() {
     showModalBottomSheet(
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10),
-            topRight: Radius.circular(10),
-          ),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10),
+          topRight: Radius.circular(10),
         ),
-        isScrollControlled: true,
-        context: context,
-        builder: (ctx) {
-          return const ExpenOverlay();
-        });
+      ),
+      isScrollControlled: true,
+      context: context,
+      builder: (ctx) {
+        return ExpenOverlay(onAddExpense);
+      },
+    );
   }
 
   @override

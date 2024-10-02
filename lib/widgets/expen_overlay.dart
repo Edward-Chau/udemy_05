@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:udemy05_expense_tracke_app/model/expenses.dart';
 
 class ExpenOverlay extends StatefulWidget {
-  const ExpenOverlay({super.key});
+  const ExpenOverlay(this.onExpense, {super.key});
 
+  final Function(Expenses item) onExpense; //?
   @override
   State<ExpenOverlay> createState() => _ExpenOverlayState();
 }
@@ -18,6 +19,42 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
   DateTime? selectedDate;
+  Category selectedCategory = Category.food;
+
+  void saveExpense() {
+    final amountValue = double.tryParse(amountController.text);
+    bool invalidAmount = (amountValue == null) || (amountValue <= 0);
+    if (invalidAmount ||
+        titleController.text.trim().isEmpty ||
+        selectedDate == null) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            icon: const Icon(Icons.error_outline),
+            title: const Text("Error"),
+            content: const Text("plz enter value"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text("Okay"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+    widget.onExpense(
+      Expenses(
+          //?=>Expenses?
+          title: titleController.text,
+          amount: double.tryParse(amountController.text)!,
+          date: selectedDate!,
+          category: selectedCategory),
+    );
+  } //?
 
   @override
   void dispose() {
@@ -39,7 +76,7 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
     });
   }
 
-  final List<String> test01 = ['ss', 'd', 'f'];
+  // final List<String> test01 = ['ss', 'd', 'f'];
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +135,9 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
                     if (selectedDate == null)
                       const Text('No seleced Date')
                     else
-                      Text(format.format(selectedDate!)),
+                      Text(
+                        format.format(selectedDate!),
+                      ),
                     IconButton(
                       onPressed: datePacker,
                       icon: const Icon(Icons.calendar_month),
@@ -115,11 +154,22 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
                 items: Category.values.map((item) {
                   return DropdownMenuItem(
                     value: item,
-                    child: Text(item.name),
+                    child: Text(
+                      item.name.toUpperCase(),
+                    ),
                   );
                 }).toList(),
-                value: Category.food,
-                onChanged: (value) {},
+                value: selectedCategory,
+                onChanged: (value) {
+                  setState(
+                    () {
+                      if (value == null) {
+                        return;
+                      }
+                      selectedCategory = value;
+                    },
+                  );
+                },
               ),
               const Spacer(),
               ElevatedButton(
@@ -129,11 +179,14 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
                 child: const Text("Cancel"),
               ),
               ElevatedButton(
-                onPressed: () {
-                  print(titleController.text);
-                  print(amountController.text);
-                  // print(pickDate);
-                },
+                onPressed: saveExpense
+                // onPressed: () {
+                //   print(titleController.text);
+                //   print(amountController.text);
+                //   print(selectedDate);
+                //   print(selectedCategory);
+                // },
+                ,
                 child: const Text("Save Expense"),
               )
             ],

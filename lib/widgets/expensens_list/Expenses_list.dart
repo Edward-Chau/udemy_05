@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:udemy05_expense_tracke_app/model/expenses.dart';
 import 'package:udemy05_expense_tracke_app/widgets/expensens_list/expen_item.dart';
 
-
 class ExpensesList extends StatelessWidget {
   const ExpensesList({required this.expensesList, super.key});
 
@@ -25,9 +24,10 @@ class ExpensesList extends StatelessWidget {
     return ListView.builder(
       itemCount: expensesList.length,
       itemBuilder: (context, index) {
-        return ExpenItem(expensesList[index]);
+        return ExpenItem(
+          expensesList[index],
+        );
       },
-    ); 
+    );
   }
 }
-
