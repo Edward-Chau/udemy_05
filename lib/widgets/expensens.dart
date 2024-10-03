@@ -67,8 +67,24 @@ class _ExpensensState extends State<Expensens> {
     );
   }
 
+//(listIndex, Expenses expenElement)need!
+  void undo(listIndex, Expenses expenElement) {
+    setState(
+      () {
+        registeredExpenses.insert(listIndex, expenElement);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Widget mainContent = ExpensesList(expensesList: registeredExpenses);
+    // if (registeredExpenses.isEmpty) {
+    //   mainContent = const Center(
+    //     child: Text("Add some Expense to List"),
+    //   );
+    // }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Expensens Tracker"),
@@ -79,15 +95,17 @@ class _ExpensensState extends State<Expensens> {
           )
         ],
       ),
-      body: Container(margin: EdgeInsets.symmetric(horizontal: 20),
+      body: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             const Text("The Chart"),
             Expanded(
-              //?
-              child: ExpensesList(expensesList: registeredExpenses),
+              child: ExpensesList(
+                expensesList: registeredExpenses,
+                undo: undo,
+              ),
             ),
-            // ...registeredExpenses.map((item){return Text(((item.id)));})
           ],
         ),
       ),
