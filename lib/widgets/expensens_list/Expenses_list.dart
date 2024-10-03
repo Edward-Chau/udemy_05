@@ -97,7 +97,7 @@ class _ExpensesListState extends State<ExpensesList> {
                 ),
               );
             },
-            background: Container(
+            secondaryBackground: Container(
               color: Colors.red,
               child: const Row(
                 children: [
@@ -106,6 +106,16 @@ class _ExpensesListState extends State<ExpensesList> {
                   SizedBox(
                     width: 30,
                   )
+                ],
+              ),
+            ),
+            background: Container(
+              color: Colors.red,
+              child: const Row(
+                children: [
+                  SizedBox(width: 30),
+                  Icon(Icons.cancel),
+                  Spacer(),
                 ],
               ),
             ),

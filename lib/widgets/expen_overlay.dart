@@ -177,7 +177,7 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
                     },
                   ),
                   const Spacer(),
-                  ElevatedButton(
+                  TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },

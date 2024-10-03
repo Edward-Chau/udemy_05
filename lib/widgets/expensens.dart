@@ -87,7 +87,17 @@ class _ExpensensState extends State<Expensens> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Expensens Tracker"),
+        title: const Row(
+          children: [
+            Icon(Icons.list_alt_outlined),
+            SizedBox(
+              width: 8,
+            ),
+            Text(
+              "Expensens Tracker",
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: openAddExpensenOverlay,
