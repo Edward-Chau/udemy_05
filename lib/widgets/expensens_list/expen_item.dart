@@ -5,7 +5,6 @@ class ExpenItem extends StatelessWidget {
   const ExpenItem(this.expensens, {super.key});
   final Expenses expensens;
 
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -14,7 +13,10 @@ class ExpenItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(expensens.title),
+            Text(
+              expensens.title,
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
             Row(
               children: [
                 Text(
@@ -23,8 +25,7 @@ class ExpenItem extends StatelessWidget {
                 const Spacer(),
                 Icon(categoryIcon[expensens.category]),
                 const SizedBox(
-                  width: 5
-                  ,
+                  width: 5,
                 ),
                 Text(expensens.formatate)
               ],

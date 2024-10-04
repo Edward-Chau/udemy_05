@@ -28,11 +28,14 @@ void main() {
           ),
         ),
         textTheme: ThemeData().textTheme.copyWith(
-              titleLarge: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
+            titleLarge: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
             ),
+            displayMedium: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black,fontSize: 18
+            ),),
       ),
       home: const Expensens(),
     ),
