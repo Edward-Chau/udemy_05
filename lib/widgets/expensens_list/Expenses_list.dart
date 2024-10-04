@@ -76,6 +76,7 @@ class _ExpensesListState extends State<ExpensesList> {
                   widget.expensesList.removeAt(index);
                 },
               );
+
               ScaffoldMessenger.of(context).clearSnackBars();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

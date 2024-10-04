@@ -14,6 +14,17 @@ class Expensens extends StatefulWidget {
 class _ExpensensState extends State<Expensens> {
 //?List<Expenses>
 //?list
+   
+  Widget totalPrice(Category toElement) {
+ double categoryPrice = 0;
+    for (var i = 0; i < registeredExpenses.length; i++) {
+      if (toElement == registeredExpenses[i].category) {
+        categoryPrice = categoryPrice + registeredExpenses[i].amount;
+      }
+    }
+    return Text("\$${categoryPrice.toString()}");
+  }
+
   final List<Expenses> registeredExpenses = [
     Expenses(
         title: "cat",
@@ -67,11 +78,14 @@ class _ExpensensState extends State<Expensens> {
     );
   }
 
+
+
 //(listIndex, Expenses expenElement)need!
   void undo(listIndex, Expenses expenElement) {
     setState(
       () {
         registeredExpenses.insert(listIndex, expenElement);
+       
       },
     );
   }
@@ -109,7 +123,37 @@ class _ExpensensState extends State<Expensens> {
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            const Text("The Chart"),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Container(
+                // color: Colors.deepOrange[400],
+                height: 80,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.deepOrange[400]),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    ...Category.values.map(
+                      (toElement) {
+                        return Column(
+                          children: [
+                            totalPrice(toElement),
+                            Row(
+                              children: [
+                                Icon(categoryIcon[toElement]), //?
+                                Text(toElement.name)
+                              ],
+                            )
+                          ],
+                        );
+                      },
+                    )
+                  ],
+                ),
+              ),
+            ),
             Expanded(
               child: ExpensesList(
                 expensesList: registeredExpenses,
