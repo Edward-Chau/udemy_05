@@ -15,7 +15,7 @@ class ExpenItem extends StatelessWidget {
           children: [
             Text(
               expensens.title,
-              style: Theme.of(context).textTheme.displayMedium,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             Row(
               children: [
