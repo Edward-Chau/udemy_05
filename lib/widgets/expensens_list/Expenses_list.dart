@@ -49,9 +49,13 @@ import 'package:udemy05_expense_tracke_app/widgets/expensens_list/expen_item.dar
 
 class ExpensesList extends StatefulWidget {
   const ExpensesList(
-      {required this.expensesList, required this.undo, super.key});
+      {required this.expensesList,
+      required this.undo,
+      required this.deledExpense,
+      super.key});
   final List<Expenses> expensesList;
   final Function(int, Expenses) undo; //(int, Expenses)need!
+  final Function(int) deledExpense;
 
   @override
   State<ExpensesList> createState() => _ExpensesListState();
@@ -73,7 +77,8 @@ class _ExpensesListState extends State<ExpensesList> {
               Expenses saveUndoElement = widget.expensesList[index];
               setState(
                 () {
-                  widget.expensesList.removeAt(index);
+                  // widget.expensesList.removeAt(index);
+                  widget.deledExpense(index);
                 },
               );
 

@@ -14,9 +14,9 @@ class Expensens extends StatefulWidget {
 class _ExpensensState extends State<Expensens> {
 //?List<Expenses>
 //?list
-   
+
   Widget totalPrice(Category toElement) {
- double categoryPrice = 0;
+    double categoryPrice = 0;
     for (var i = 0; i < registeredExpenses.length; i++) {
       if (toElement == registeredExpenses[i].category) {
         categoryPrice = categoryPrice + registeredExpenses[i].amount;
@@ -53,6 +53,14 @@ class _ExpensensState extends State<Expensens> {
   //   );
   // }
 
+  deledExpense(index) {
+    setState(
+      () {
+        registeredExpenses.removeAt(index);
+      },
+    );
+  }
+
   onAddExpense(Expenses item) {
     setState(
       () {
@@ -78,14 +86,11 @@ class _ExpensensState extends State<Expensens> {
     );
   }
 
-
-
 //(listIndex, Expenses expenElement)need!
   void undo(listIndex, Expenses expenElement) {
     setState(
       () {
         registeredExpenses.insert(listIndex, expenElement);
-       
       },
     );
   }
@@ -122,6 +127,8 @@ class _ExpensensState extends State<Expensens> {
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -133,14 +140,18 @@ class _ExpensensState extends State<Expensens> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.deepOrange[400]),
                 child: Row(
+                  // crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ...Category.values.map(
                       (toElement) {
                         return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             totalPrice(toElement),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Icon(categoryIcon[toElement]), //?
                                 Text(toElement.name)
@@ -149,7 +160,7 @@ class _ExpensensState extends State<Expensens> {
                           ],
                         );
                       },
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -157,6 +168,7 @@ class _ExpensensState extends State<Expensens> {
             Expanded(
               child: ExpensesList(
                 expensesList: registeredExpenses,
+                deledExpense: deledExpense,
                 undo: undo,
               ),
             ),

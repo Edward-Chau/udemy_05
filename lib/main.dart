@@ -9,7 +9,7 @@ void main() {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.light, //mode .system is default
+      themeMode: ThemeMode.system, //mode .system is default
       darkTheme: ThemeData.dark().copyWith(),
       theme: ThemeData().copyWith(
         colorScheme: kColorSchem,
@@ -34,6 +34,7 @@ void main() {
               titleLarge: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
+                color: Colors.black,
               ),
               displayMedium: const TextStyle(
                 fontWeight: FontWeight.bold,
