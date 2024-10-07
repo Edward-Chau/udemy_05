@@ -25,7 +25,7 @@ class _ExpensensState extends State<Expensens> {
     return Text("\$${categoryPrice.toString()}");
   }
 
-  final List<Expenses> registeredExpenses = [
+   List<Expenses> registeredExpenses = [
     Expenses(
         title: "cat",
         amount: 20.5,
@@ -37,6 +37,9 @@ class _ExpensensState extends State<Expensens> {
         date: DateTime.now(),
         category: Category.food),
   ];
+
+
+  
 
   // addToList(String titleController, String amountController,
   //     DateTime selectedDate, Category selectedCategory) {
@@ -103,6 +106,8 @@ class _ExpensensState extends State<Expensens> {
     //     child: Text("Add some Expense to List"),
     //   );
     // }
+
+     
 
     return Scaffold(
       appBar: AppBar(

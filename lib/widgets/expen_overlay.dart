@@ -16,7 +16,7 @@ class _ExpenOverlayState extends State<ExpenOverlay> {
   //   enteredTitle = inputvalue;
   // }
 
-  final titleController = TextEditingController();
+  final titleController = TextEditingController(text: "test");
   final amountController = TextEditingController();
   DateTime? selectedDate;
   Category selectedCategory = Category.food;

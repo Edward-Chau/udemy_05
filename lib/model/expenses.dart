@@ -24,7 +24,7 @@ class Expenses {
       : id = uuid.v4();
 
   final String id;
-  final String title;
+   String title;
   final double amount;
   final DateTime date;
   final Category category;
